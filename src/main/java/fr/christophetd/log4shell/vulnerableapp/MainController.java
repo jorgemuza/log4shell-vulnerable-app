@@ -15,7 +15,16 @@ public class MainController {
 
     @GetMapping("/")
     public String index(@RequestHeader("X-Api-Version") String apiVersion) {
+        logger.info("===== Direct string logged====");
         logger.info("Received a request for API version " + apiVersion);
+        logger.info("===== String formatted logged====");
+        logger.info(String.format("Received a request for API version %s", apiVersion));
+        try {
+            throw new Exception(apiVersion);
+        } catch (Exception ex) {
+            logger.info("===== Handled exception formatted logged====");
+            logger.info(ex);
+        }
         return "Hello, world!";
     }
 
